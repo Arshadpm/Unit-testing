@@ -1,0 +1,31 @@
+{
+  "dependencies": {
+    "@babel/cli": "^7.20.7",
+    "@babel/core": "^7.20.12",
+    "chalk": "^4.1.2",
+    "complexity-report-ext": "^0.0.4",
+    "coverage-node": "^8.0.0",
+    "jslint": "^0.12.1",
+    "lizard": "^1.0.0",
+    "prompt-sync": "^4.2.0",
+    "prompts": "^2.4.2",
+    "tee": "^0.2.0",
+    "valgrind-tool": "^1.0.3"
+  },
+  "name": "basictest",
+  "version": "1.0.0",
+  "main": "basictest.js",
+  "scripts": {
+    "test": "node"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "eslint": "^8.33.0",
+    "eslint-plugin-complexity": "^1.0.2",
+    "eslint-plugin-react": "^7.32.2",
+    "nyc": "^15.1.0"
+  }
+}

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Plato - basic.js</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+
+  <link href="../../assets/css/vendor/morris.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/bootstrap.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/font-awesome.css" rel="stylesheet">
+  <link href="../../assets/css/vendor/codemirror.css" rel="stylesheet">
+  <link href="../../assets/css/plato.css" rel="stylesheet">
+  <link href="../../assets/css/plato-file.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="navbar navbar-fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="http://github.com/es-analysis/plato">Plato on Github</a>
+    <ul class="nav navbar-nav">
+      <li>
+        <a href="../../index.html">Report Home</a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="jumbotron">
+  <div class="container">
+    <h1>basic.js</h1>
+  </div>
+</div>
+
+<div class="container aggregate-stats">
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Maintainability <a href="http://blogs.msdn.com/b/codeanalysis/archive/2007/11/20/maintainability-index-range-and-meaning.aspx"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="A value between 0 and 100 that represents the relative ease of maintaining the code. A high value means better maintainability." data-original-title="Maintainability Index"  data-container="body"></i></a></h2>
+      <p class="stat">54.35</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Lines of code <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h2>
+      <p class="stat">228</p>
+    </div>
+  </div>
+  <div class="row historical">
+    <div class="col-md-6">
+      <p id="chart_historical_maint" class="chart"></p>
+    </div>
+    <div class="col-md-6">
+      <p id="chart_historical_sloc" class="chart"></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h2 class="header">Difficulty  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="The difficulty measure is related to the difficulty of the program to write or understand." data-original-title="Difficulty" data-container="body"></i></a></h2>
+      <p class="stat">52.22</p>
+    </div>
+    <div class="col-md-6">
+      <h2 class="header">Estimated Errors  <a href="http://en.wikipedia.org/wiki/Halstead_complexity_measures"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Halstead's delivered bugs is an estimate for the number of errors in the implementation." data-original-title="Delivered Bugs" data-container="body"></i></a></h2>
+      <p class="stat">2.06</p>
+    </div>
+  </div>
+</div>
+
+<div class="container charts">
+  <div class="row">
+    <h2 class="header">Function weight</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <h3 class="chart-header">By Complexity <a href="http://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="This metric counts the number of distinct paths through a block of code. Lower values are better." data-original-title="Cyclomatic Complexity" data-container="body"></i></a></h3>
+      <div id="fn-by-complexity" class="stat"></div>
+    </div>
+    <div class="col-md-6">
+      <h3 class="chart-header">By SLOC  <i class="icon icon-info-sign" rel="popover" data-placement="top" data-trigger="hover" data-content="Source Lines of Code / Logical Lines of Code" data-original-title="SLOC/LSLOC" data-container="body"></i></h3>
+      <div id="fn-by-sloc" class="stat"></div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <textarea id="file-source" class="col-md-12">var tests = require(&#039;./Testcases&#039;);
+// const testEmails =require(&#039;./testEmails&#039;);
+// const object = require(&#039;./object&#039;);
+var valid = require(&#039;./Validation2&#039;);
+var errorc = require(&#039;./Errorcode&#039;);
+
+
+
+var chalk = require(&#039;chalk&#039;); //to make colorful text
+var prompt = require(&quot;prompt-sync&quot;)();
+ 
+
+let again = &quot;Y&quot;;
+do {
+  var op = prompt(&quot;Do you want to run (Y/N):&quot;);
+  if (op.toLowerCase() == &quot;y&quot;) {
+    prompt(
+      &quot;1. ALL\n2. RANDOM\n3. SPECIFIC\n4. CUSTOM\n&quot; 
+    )
+
+    var option = prompt(
+      &quot;Enter option : &quot;
+    );
+    
+      
+
+      console.log(chalk.gray.italic(&quot;\nentering into switch case......\n&quot;));
+    switch (option) {
+
+      case &quot;1&quot;:
+       
+        all();
+        break;
+      case &quot;2&quot;:
+        var times=prompt(&quot;How many times you want to test?&quot;)
+        var count=0;
+        var coverage1=0;
+        var failed1=0;
+        var k=0;
+        for(var i=1;i&lt;=times;i++)
+        {
+          console.log(&quot;------------------------------&quot;);
+          console.log(count+=1,&quot; times&quot;);
+        random(tests);
+        }
+
+        console.log(chalk.yellow(&quot;Total number of test cases  is: &quot;,k));
+        console.log(chalk.green(&quot;number of test cases passed is: &quot;,coverage1));
+        console.log(chalk.red(&quot;number of test cases failed is: &quot;,failed1));
+
+       var per=(coverage1*100)/k;
+
+        console.log(chalk.green(&quot;coverage percentage is &quot;+per+&quot;%&quot;));
+
+        break;
+      case &quot;3&quot;:
+        specific();
+        break;
+      case &quot;4&quot;:
+        custom();
+        break;
+
+      default:
+        
+        errorc.printErrorMessage(1001);
+
+        break;
+    }
+  } else if (op.toLowerCase() == &quot;n&quot;) {
+    break;
+  } else {
+    
+    errorc.printErrorMessage(1001);
+
+  }
+} while (again == &quot;Y&quot;);
+
+function all() {
+
+
+  var coverage=0;
+  var failed=0;
+  var per;
+  var j=0;
+
+  for (let i = 0; i &lt; tests.length; i++) {
+    console.log(&quot;------------------------------&quot;);
+    j=j+1;
+    let test = tests[i];
+    
+
+    console.log(&quot;Test case &quot;+i+&quot;:&quot; + test.testcase);
+    console.log(&quot;Input: &quot; + test.email);
+    console.log(&quot;Expected result: &quot; + test.expectedResult);
+
+    let result = valid.isValidEmail(test.email);
+    console.log(&quot;Output: &quot; + result);
+
+    if(result === test.expectedResult)
+    {
+      coverage=coverage+1;
+      console.log(chalk.green(&quot;Test case &quot;+i+&quot; passed&quot;));
+    }
+    else{
+      failed=failed+1;
+      console.log(chalk.red(&quot;Test case &quot;+i+&quot; failed&quot;));
+    }
+  
+    console.log(&quot;\n&quot;);
+  }
+  
+console.log(&quot;All tests passed!&quot;);
+console.log(chalk.yellow(&quot;Total number of test cases  is: &quot;,j));
+console.log(chalk.green(&quot;number of test cases passed is: &quot;,coverage));
+console.log(chalk.red(&quot;number of test cases failed is: &quot;,failed));
+
+per=(coverage*100)/j;
+
+console.log(chalk.green(&quot;coverage percentage is &quot;+per+&quot;%&quot;));
+
+}
+
+
+
+function specific() {
+  console.log(&quot;specific&quot;);
+
+  console.log(&quot;------------------------------&quot;);
+
+  console.log(&quot;Test Objective: Email validation&quot;);
+
+console.log(&quot;\nPlease enter any specific ids from given below\n&quot;)
+
+
+
+for (let i = 0; i &lt; tests.length; i++) {
+
+  let test2 = tests[i];
+
+  console.log(test2.id+&quot;-&quot;+test2.email);
+
+}
+
+var id = prompt(&quot;Enter id option : &quot;);
+
+console.log(id);
+
+
+var testCase=tests.find(testCase =&gt; testCase.id == id)
+console.log(testCase);
+console.log(testCase.email);
+
+var result=valid.isValidEmail(testCase.email);
+console.log(result);
+
+if(result === testCase.expectedResult)
+{
+  console.log(chalk.green(&quot;Test case &quot;+id+&quot; passed&quot;));
+  console.log(chalk.green(&quot;Coverage percentage is: 100%&quot;));
+}
+else{
+  console.log(chalk.red(&quot;Test case &quot;+id+&quot; failed&quot;));
+  console.log(chalk.red(&quot;Coverage percentage is: 0%&quot;));
+}
+console.log(chalk.green.bold(&quot;\nTests are passed\n&quot;));
+console.log(chalk.gray.italic(&quot;\nexiting from case 3 ......\n&quot;));
+}
+
+function custom() {
+
+  console.log(chalk.gray.italic(&quot;\nentered into switch case 4......\n&quot;));
+  console.log(&quot;custom&quot;);
+  console.log(&quot;------------------------------&quot;);
+ 
+
+  console.log(&quot;Test Objective: Email validation&quot;);
+
+      var custom1 = prompt(&quot;Enter email: &quot;);
+      console.log(chalk.gray.italic(&quot;\nread the email value......\n&quot;));
+      console.log(chalk.gray.italic(&quot;\npassing email value to validate function()......\n&quot;));
+      var result=valid.isValidEmail(custom1);
+      console.log(result);
+
+      if(result==200)
+      {
+      console.log(chalk.green(&quot;Test case with &quot;+custom1+&quot; passed&quot;));
+      console.log(chalk.green(&quot;Coverage percentage is: 100%&quot;));
+      }
+      else if(result==204){
+      console.log(chalk.red(&quot;Test case with &quot;+custom1+&quot; failed&quot;));
+      console.log(chalk.red(&quot;Coverage percentage is: 0%&quot;));
+      }
+
+      
+      
+      console.log(chalk.gray.italic(&quot;\nexiting from case 4 ......\n&quot;));
+  }
+
+  
+  
+  function random(array) {
+    
+   k=k+1;
+    console.log(&quot;Test Objective: Email validation&quot;);
+    var randomIndex = Math.floor((Math.random() )* (array.length));
+    console.log(&quot;id-&quot;,randomIndex);
+    console.log(array[randomIndex]);
+    var test1=array[randomIndex];
+    
+    var result=valid.isValidEmail(test1.email);
+    console.log(&quot;Test case &quot;+i+&quot;:&quot; + test1.testcase);
+    console.log(&quot;Input: &quot; + test1.email);
+    console.log(&quot;Expected result: &quot; + test1.expectedResult);
+    console.log(&quot;Output: &quot; + result);
+
+    if(result === test1.expectedResult)
+    {
+      coverage1=coverage1+1;
+      console.log(chalk.green(&quot;Test case &quot;+randomIndex+&quot; passed&quot;));
+      
+    }
+    else{
+      failed1=failed1+1;
+      console.log(chalk.red(&quot;Test case &quot;+randomIndex+&quot; failed&quot;));
+    }
+    console.assert(result === test1.expectedResult, &quot;Test case &quot; + (i + 1) + &quot;passed&quot;);
+    console.log(&quot;\n&quot;);
+  }</textarea>
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>.</p>
+  </div>
+</footer>
+
+<script type="text/html" id="complexity-popover-template">
+  <div class="complexity-notice">
+    Complexity : {{ cyclomatic }} <br>
+    Length : {{ halstead.length }} <br>
+    Difficulty : {{ halstead.difficulty.toFixed(2) }} <br>
+    Est # bugs : {{ halstead.bugs.toFixed(2) }}<br>
+  </div>
+</script>
+
+<script type="text/javascript" src="../../assets/scripts/bundles/core-bundle.js"></script>
+<script type="text/javascript" src="../../assets/scripts/bundles/codemirror.js"></script>
+<script type="text/javascript" src="../../assets/scripts/codemirror.markpopovertext.js"></script>
+<script type="text/javascript" src="report.js"></script>
+<script type="text/javascript" src="report.history.js"></script>
+<script type="text/javascript" src="../../assets/scripts/plato-file.js"></script>
+</body>
+</html>
